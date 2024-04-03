@@ -1,7 +1,3 @@
-# Stackoverflow-coding-discuss
-this is a react appilication used for discussion of coding questions (inspired from stack overflow)
+# IIT Bhilai Coding Discussion Platform 💻
 
-after downloading the code read package.json to install all the necesssary packages seperately for client and server
-create a new .env file inside which u can add your mongoDB url so that you can connect it to your database
-
-and run using nodemon dev dependency
+Welcome to the IIT Bhilai Coding Discussion Platform! This platform is designed to facilitate discussions, problem-solving, and collaboration among the students and faculty of the Indian Institute of Technology (IIT) Bhilai. Whether you're a beginner or an experienced coder, this platform aims to provide a supportive environment for learning and growth in the field of computer science and programming.
