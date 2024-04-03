@@ -32,7 +32,7 @@ const AddPost = ({ location, NewPost, UpdatePost, auth, Toggle_modal }) => {
     });
   };
   const handelsubmit = (e) => {
-    if (value === "" || postForm.title === "" || !postForm.snippet === "") {
+    if (value === "" || postForm.title === "" || postForm.snippet === "") {
       alert("Invalid Post!");
       return;
     }
