@@ -1,4 +1,0 @@
-{
-  "mongoURI": "MONGODB_URL",
-  "jwtSecret": "shhhhhh"
-}

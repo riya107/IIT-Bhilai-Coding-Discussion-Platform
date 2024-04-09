@@ -7,7 +7,7 @@ import { tokenConfig } from "./AuthActions";
 export const get_profile = (username) => (dispatch) => {
   dispatch(ProfileLoading());
   axios
-    .get(`/api/users/${username}`)
+    .get(`${process.env.REACT_APP_API_URL}/api/users/${username}`)
     .then((res) =>
       dispatch({
         type: types.GET_PROFILE,
@@ -25,7 +25,7 @@ export const get_profile = (username) => (dispatch) => {
 export const update_profile = (payload) => (dispatch, getState) => {
   dispatch(ProfileLoading());
   axios
-    .post(`/api/users/user`, payload, tokenConfig(getState))
+    .post(`${process.env.REACT_APP_API_URL}/api/users/user`, payload, tokenConfig(getState))
     .then((res) =>
       dispatch({
         type: types.UPDATE_PROFILE,

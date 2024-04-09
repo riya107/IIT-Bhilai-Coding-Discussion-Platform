@@ -28,7 +28,7 @@ const SignUp = ({ error, auth, registerUser, clearErrors }) => {
     }
     clearTimeout(userTimeout);
     userTimeout = setTimeout(() => {
-      Axios.get("/api/users/validateuser", {
+      Axios.get(`${process.env.REACT_APP_API_URL}/api/users/validateuser`, {
         headers: { username: data },
       })
         .then((res) => {
@@ -48,7 +48,7 @@ const SignUp = ({ error, auth, registerUser, clearErrors }) => {
     }
     clearTimeout(userTimeout);
     userTimeout = setTimeout(() => {
-      Axios.get("/api/users/validateemail", {
+      Axios.get(`${process.env.REACT_APP_API_URL}/api/users/validateemail`, {
         headers: { email: data },
       })
         .then((res) => {

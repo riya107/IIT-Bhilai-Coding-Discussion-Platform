@@ -6,7 +6,7 @@ export const loadUser = () => (dispatch, getState) => {
   dispatch(userLoading()); // set loading user.
 
   axios
-    .get("/api/auth/user", tokenConfig(getState))
+    .get(`${process.env.REACT_APP_API_URL}/api/auth/user`, tokenConfig(getState))
     .then((res) =>
       dispatch({
         type: types.USER_LOADED,
@@ -24,7 +24,7 @@ export const loadUser = () => (dispatch, getState) => {
 export const registerUser = (data) => (dispatch, getState) => {
   dispatch(userLoading());
   axios
-    .post("/api/users", data, tokenConfig(getState))
+    .post(`${process.env.REACT_APP_API_URL}/api/users`, data, tokenConfig(getState))
     .then((res) => {
       dispatch({
         type: types.REGISTER_SUCCESS,
@@ -51,7 +51,7 @@ export const registerUser = (data) => (dispatch, getState) => {
 export const loginUser = (data) => (dispatch, getState) => {
   dispatch(userLoading());
   axios
-    .post("/api/auth", data, tokenConfig(getState))
+    .post(`${process.env.REACT_APP_API_URL}/api/auth`, data, tokenConfig(getState))
     .then((res) => {
       dispatch({
         type: types.LOGIN_SUCCESS,

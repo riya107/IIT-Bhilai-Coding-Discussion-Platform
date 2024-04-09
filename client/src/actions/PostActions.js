@@ -12,7 +12,7 @@ export const FetchPosts = (payload) => (dispatch) => {
     };
   }
   axios
-    .get("/api/posts", config)
+    .get(`${process.env.REACT_APP_API_URL}/api/posts`, config)
     .then((res) =>
       dispatch({
         type: types.FETCH_POSTS,
@@ -33,7 +33,7 @@ export const FetchPosts = (payload) => (dispatch) => {
 export const GetPost = (payload) => (dispatch) => {
   dispatch(setLoading());
   axios
-    .get(`/api/posts/${payload}`)
+    .get(`${process.env.REACT_APP_API_URL}/api/posts/${payload}`)
     .then((res) =>
       dispatch({
         type: types.GET_POST,
@@ -49,7 +49,7 @@ export const GetPost = (payload) => (dispatch) => {
 
 export const Addcomment = (id, payload) => (dispatch, getState) => {
   axios
-    .put(`/api/posts/${id}`, payload, tokenConfig(getState))
+    .put(`${process.env.REACT_APP_API_URL}/api/posts/${id}`, payload, tokenConfig(getState))
     .then((res) =>
       dispatch({
         type: types.ADD_COMMENT,
@@ -69,7 +69,7 @@ export const Addcomment = (id, payload) => (dispatch, getState) => {
 
 export const DeletePost = (payload) => (dispatch, getState) => {
   axios
-    .delete(`/api/posts/${payload}`, tokenConfig(getState))
+    .delete(`${process.env.REACT_APP_API_URL}/api/posts/${payload}`, tokenConfig(getState))
     .then(() =>
       dispatch({
         type: types.DELETE_POST,
@@ -88,7 +88,7 @@ export const DeletePost = (payload) => (dispatch, getState) => {
 };
 export const UpdatePost = (payload) => (dispatch, getState) => {
   axios
-    .put("/api/posts", payload, tokenConfig(getState))
+    .put(`${process.env.REACT_APP_API_URL}/api/posts`, payload, tokenConfig(getState))
     .then((res) => {
       dispatch({
         type: types.UPDATE_POST,
@@ -108,7 +108,7 @@ export const UpdatePost = (payload) => (dispatch, getState) => {
 
 export const AddPost = (payload) => (dispatch, getState) => {
   axios
-    .post("/api/posts", payload, tokenConfig(getState))
+    .post(`${process.env.REACT_APP_API_URL}/api/posts`, payload, tokenConfig(getState))
     .then((res) =>
       dispatch({
         type: types.ADD_POST,
@@ -123,7 +123,7 @@ export const AddPost = (payload) => (dispatch, getState) => {
 };
 
 export const DoVote = (id, payload) => (dispatch, getState) => {
-  axios.post(`/api/posts/${id}`, payload, tokenConfig(getState)).then((res) =>
+  axios.post(`${process.env.REACT_APP_API_URL}/api/posts/${id}`, payload, tokenConfig(getState)).then((res) =>
     dispatch({
       type: types.DO_VOTE,
       payload: res.data,

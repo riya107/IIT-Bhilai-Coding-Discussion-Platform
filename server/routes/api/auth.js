@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const config = require("config");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const auth = require("./../../middleware/auth");
@@ -20,7 +19,7 @@ router.post("/", (req, res) => {
   User.findOne({ username: username }, (err, user) => {
     if (err) throw err;
     if (!user) return res.status(400).json({ msg: "User doesn't Exist" });
-
+    
     bcrypt.compare(password, user.password, (err, success) => {
       if (err) throw err;
       if (!success)
@@ -29,7 +28,7 @@ router.post("/", (req, res) => {
           .json({ msg: "Username and password doesn't match" });
       jwt.sign(
         { id: user.id },
-        config.get("jwtSecret"),
+        process.env.JWT_SECRET,
         { expiresIn: 24 * 60 * 60 },
         (err, token) => {
           if (err) throw err;

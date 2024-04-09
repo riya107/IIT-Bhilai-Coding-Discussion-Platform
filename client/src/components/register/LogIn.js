@@ -57,7 +57,7 @@ const LogIn = ({ error, auth, loginUser, clearErrors }) => {
             type="text"
             name="username"
             autoComplete="username"
-            placeholder="Your username or Email "
+            placeholder="Your username"
             onChange={handleChange}
             value={loginForm.email}
           />
