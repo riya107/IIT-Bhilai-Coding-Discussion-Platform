@@ -3,13 +3,15 @@ import * as types from "./types";
 import { tokenConfig } from "./AuthActions";
 import { returnErrors } from "./ErrorActions";
 
-export const FetchPosts = (payload) => (dispatch) => {
+export const FetchPosts = (author, text) => (dispatch) => {
   dispatch(setLoading());
   const config = {};
-  if (payload) {
-    config["headers"] = {
-      author: payload,
-    };
+  config["headers"] = {};
+  if (author) {
+    config["headers"]["author"] = author;
+  }
+  if (text) {
+    config["headers"]["text"] = text;
   }
   axios
     .get(`${process.env.REACT_APP_API_URL}/api/posts`, config)
@@ -49,7 +51,11 @@ export const GetPost = (payload) => (dispatch) => {
 
 export const Addcomment = (id, payload) => (dispatch, getState) => {
   axios
-    .put(`${process.env.REACT_APP_API_URL}/api/posts/${id}`, payload, tokenConfig(getState))
+    .put(
+      `${process.env.REACT_APP_API_URL}/api/posts/${id}`,
+      payload,
+      tokenConfig(getState)
+    )
     .then((res) =>
       dispatch({
         type: types.ADD_COMMENT,
@@ -69,7 +75,10 @@ export const Addcomment = (id, payload) => (dispatch, getState) => {
 
 export const DeletePost = (payload) => (dispatch, getState) => {
   axios
-    .delete(`${process.env.REACT_APP_API_URL}/api/posts/${payload}`, tokenConfig(getState))
+    .delete(
+      `${process.env.REACT_APP_API_URL}/api/posts/${payload}`,
+      tokenConfig(getState)
+    )
     .then(() =>
       dispatch({
         type: types.DELETE_POST,
@@ -88,7 +97,11 @@ export const DeletePost = (payload) => (dispatch, getState) => {
 };
 export const UpdatePost = (payload) => (dispatch, getState) => {
   axios
-    .put(`${process.env.REACT_APP_API_URL}/api/posts`, payload, tokenConfig(getState))
+    .put(
+      `${process.env.REACT_APP_API_URL}/api/posts`,
+      payload,
+      tokenConfig(getState)
+    )
     .then((res) => {
       dispatch({
         type: types.UPDATE_POST,
@@ -108,7 +121,11 @@ export const UpdatePost = (payload) => (dispatch, getState) => {
 
 export const AddPost = (payload) => (dispatch, getState) => {
   axios
-    .post(`${process.env.REACT_APP_API_URL}/api/posts`, payload, tokenConfig(getState))
+    .post(
+      `${process.env.REACT_APP_API_URL}/api/posts`,
+      payload,
+      tokenConfig(getState)
+    )
     .then((res) =>
       dispatch({
         type: types.ADD_POST,
@@ -123,12 +140,18 @@ export const AddPost = (payload) => (dispatch, getState) => {
 };
 
 export const DoVote = (id, payload) => (dispatch, getState) => {
-  axios.post(`${process.env.REACT_APP_API_URL}/api/posts/${id}`, payload, tokenConfig(getState)).then((res) =>
-    dispatch({
-      type: types.DO_VOTE,
-      payload: res.data,
-    })
-  );
+  axios
+    .post(
+      `${process.env.REACT_APP_API_URL}/api/posts/${id}`,
+      payload,
+      tokenConfig(getState)
+    )
+    .then((res) =>
+      dispatch({
+        type: types.DO_VOTE,
+        payload: res.data,
+      })
+    );
 };
 export const setLoading = () => {
   return {

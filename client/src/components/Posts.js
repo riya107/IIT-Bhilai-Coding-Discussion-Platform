@@ -1,16 +1,19 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import { Button } from "reactstrap";
 import Moment from "react-moment";
-import { FetchPosts } from "./../actions/PostActions";
+import { FetchPosts } from "../actions/PostActions";
 import Loader from "./Loader";
-const AllPosts = ({ FetchPosts, post, author }) => {
-  useEffect(() => {
-    FetchPosts(author);
-  }, [FetchPosts, author]);
+const Posts = ({ FetchPosts, post, author }) => {
+  const { state } = useLocation();
+  const text = state ? state.text : null;
 
-  const Allposts = post.posts.map((post) => (
+  useEffect(() => {
+    FetchPosts(author, text);
+  }, [FetchPosts, author, text]);
+
+  const posts = post.posts.map((post) => (
     <div className="post col-md-8 mx-auto" key={post._id}>
       <Link to={`/api/users/${post.author}`} className="text-link text-primary">
         <small style={{ float: "right" }}> ~{post.author}</small>
@@ -39,10 +42,10 @@ const AllPosts = ({ FetchPosts, post, author }) => {
     </div>
   ));
   if (post.loading) return <Loader />;
-  return <div className="blogposts">{Allposts}</div>;
+  return <div className="blogposts">{posts}</div>;
 };
 
 const mapStateToProps = (state) => ({
   post: state.post,
 });
-export default connect(mapStateToProps, { FetchPosts })(AllPosts);
+export default connect(mapStateToProps, { FetchPosts })(Posts);

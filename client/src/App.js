@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import AppNavbar from "./components/AppNavbar";
 import AddPost from "./components/AddPost";
-import Allposts from "./components/AllPosts";
+import Posts from "./components/Posts";
 import SinglePost from "./components/SinglePost";
 import About from "./components/About";
 import Home from "./components/Home";
@@ -28,7 +28,7 @@ function App() {
             <Switch>
               <Route path="/api/posts/newpost" component={AddPost} />
               <Route path="/api/posts/:id" exact component={SinglePost} />
-              <Route path="/api/posts" component={Allposts} />
+              <Route path="/api/posts" component={Posts} />
               <Route path="/api/users/:username" exact component={Profile} />
               <Route path="/about" component={About} />
               <Route path="/" component={Home} />

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Toggle_Foucs, Toggle_modal } from "./../actions/ToggleActions";
 import { logout } from "./../actions/AuthActions";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {
   Collapse,
   Navbar,
@@ -16,12 +16,15 @@ import {
   UncontrolledDropdown,
   DropdownItem,
   DropdownMenu,
+  Input,
 } from "reactstrap";
 
 const AppNavbar = (props) => {
   const [collapsed, setCollapsed] = useState(true); // navbar collapse
+  const [text, setText] = useState(""); // navbar collapse
   const toggleNavbar = () => setCollapsed(!collapsed); //navbar Toggler
   const closeNavbar = () => setCollapsed(true); // strictly closes the navbar.
+  const history = useHistory();
 
   const registerBtn = (
     <NavLink onClick={closeNavbar} key="2" className="my-auto">
@@ -79,6 +82,16 @@ const AppNavbar = (props) => {
       </DropdownMenu>
     </UncontrolledDropdown>
   );
+
+  const handleKeyDown = async (e) => {
+    if(e.key === 'Enter'){
+      history.push({
+        pathname: '/api/posts',
+        state: { text: e.target.value }
+      });
+    }
+  }
+
   return (
     <div className="navbar">
       <Navbar
@@ -94,11 +107,16 @@ const AppNavbar = (props) => {
             tag={Link}
             to="/"
           >
-            <span className="text-success font-weight-bold">IIT BHILAI CODERS</span>UNITE!
+            <span className="text-success font-weight-bold">
+              IIT BHILAI CODERS
+            </span>
+            UNITE!
           </NavbarBrand>
           <NavbarToggler onClick={toggleNavbar} className="mr-2" />
           <Collapse isOpen={!collapsed} navbar>
             <Nav className="ml-auto" navbar>
+              <Input className="w-25" type="text" onChange={(e)=>{setText(e.target.value)}} onKeyDown={handleKeyDown} value={text} />
+
               <NavLink
                 tag={Link}
                 to="/api/posts"

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import AllPosts from "./../AllPosts";
+import AllPosts from "../Posts";
 import { connect } from "react-redux";
 import defaultDp from "./../../images/defaultDp.png";
 import EditProfile from "./EditProfile";
