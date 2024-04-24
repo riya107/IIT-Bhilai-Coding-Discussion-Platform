@@ -1,11 +1,12 @@
+import sys
+
+# Replace the built-in sqlite3 module with pysqlite3
+sys.modules['sqlite3'] = __import__('pysqlite3')
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import chromadb
 from chromadb.utils import embedding_functions
-
-__import__('pysqlite3')
-import sys
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 app = Flask(__name__)
 
